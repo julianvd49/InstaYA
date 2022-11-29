@@ -1,3 +1,5 @@
+/* Estructura principal */
+
 #wrapper {
   overflow-x: hidden;
 }
@@ -18,4 +20,70 @@
 #page-content-wrapper {
   min-width: 0;
   width: 100%;
+  display: flex;
+  padding: 10px;
+}
+
+/* Formularios */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 100px;
+}
+
+.form-order {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 100px;
+  margin-left: 200px;
+}
+
+.form-item {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-item input {
+  width: 100%;
+}
+
+.form-item-date-time {
+  display: flex;
+  gap: 10px;
+}
+
+.form-item-date-time label {
+  width: 40px;
+}
+
+.form-item-date-time input {
+  width: 140px;
+}
+
+.form-item-dimensions {
+  display: flex;
+  gap: 10px;
+}
+
+.form-item-dimensions input {
+  width: 10%;
+}
+
+.form-item-dimensions label {
+  width: 40px;
+}
+
+.form-item-horizontal {
+  display: flex;
+  gap: 10px;
+}
+
+.form-item-horizontal label {
+  width: 180px;
 }
