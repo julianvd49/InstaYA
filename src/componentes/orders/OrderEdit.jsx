@@ -10,6 +10,9 @@ function OrderEdit() {
 
   return (
     <form className="form-order" onSubmit={handleSubmit(onSubmit)}>
+      <h1>
+          <i>Cambio al instante!</i>
+      </h1>
       <div className="form-item-date-time">
         <label>Fecha</label>
         <input
@@ -126,7 +129,7 @@ function OrderEdit() {
           aria-invalid={errors.ciudad_entrega ? "true" : "false"}
         />
         {errors.ciudad_entrega && <span>This field is required</span>}
-        <input type="submit" value="Crear orden" />
+        <input type="submit" value="Actualizar" />
       </div>
     </form>
   );

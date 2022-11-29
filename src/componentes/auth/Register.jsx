@@ -11,6 +11,9 @@ function Register() {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <h1>
+          <i className='text-danger'>InstaYA!</i>
+      </h1>
       <div className="form-item">
         <label>Nombres</label>
         <input

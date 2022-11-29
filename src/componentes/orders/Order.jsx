@@ -29,9 +29,13 @@ const labels = [
 const OrderList = () => {
   return (
     <>
-      <div className="books-home">
-        <Link className="btn btn-primary" to="/order/create">
-          Create
+
+      <div className="order-list">
+        <h1>
+          <i>Tus ordenes</i>
+        </h1>
+        <Link className="btn btn-primary order-list-create" to="/order/create">
+          Crear Insta
         </Link>
         <table className="table">
           <thead>
@@ -62,13 +66,13 @@ const OrderList = () => {
                       className="btn btn-success"
                       to={"/order/" + order.id + "/edit"}
                     >
-                      Edit
+                      Editar
                     </Link>
                     <Link
                       className="btn btn-danger"
                       to={"/order/" + order.id + "/delete"}
                     >
-                      Delete
+                      Eliminar
                     </Link>
                   </td>
                 </tr>

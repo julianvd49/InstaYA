@@ -10,6 +10,11 @@ function OrderNew() {
 
   return (
     <form className="form-order" onSubmit={handleSubmit(onSubmit)}>
+      <h1>
+        <i>
+          Crea tu orden!
+        </i>
+      </h1>
       <div className="form-item-date-time">
         <label>Fecha</label>
         <input
