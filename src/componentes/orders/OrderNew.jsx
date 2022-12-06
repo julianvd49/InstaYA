@@ -8,13 +8,17 @@ function OrderNew() {
     handleSubmit,
   } = useForm();
   const onSubmit = (dataForm) => {
-    dataForm.id_usuario = "638e38702dcac6bc37a4a1e4";
+    const userId = JSON.parse(localStorage.getItem("token-info")).id_usuario
+    dataForm.id_usuario = userId;
     dataForm.estado = "Aprobado";
 
     axios
       .post("http://localhost:9000/api/orders", dataForm)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
+
+      window.location.reload();
+    
   };
 
   return (

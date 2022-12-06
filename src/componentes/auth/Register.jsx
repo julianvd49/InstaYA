@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 
@@ -7,7 +8,12 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log('Register data', data);
+  const onSubmit = (dataRegister) => {
+    console.log(dataRegister);
+    axios.post('http://localhost:9000/api/users', dataRegister)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+  }
 
   return (
     <form className='form' onSubmit={handleSubmit(onSubmit)}>
@@ -17,7 +23,7 @@ function Register() {
       <div className='form-item'>
         <label>Nombre</label>
         <input
-          {...register('nombres', { required: true })}
+          {...register('nombre', { required: true })}
           aria-invalid={errors.nombre ? 'true' : 'false'}
         />
         {errors.nombre && <span>This field is required</span>}
@@ -25,24 +31,25 @@ function Register() {
       <div className='form-item'>
         <label>Usuario</label>
         <input
-          {...register('username', { required: true })}
-          aria-invalid={errors.username ? 'true' : 'false'}
+          {...register('usuario', { required: true, min:4, max: 8 })}
+          aria-invalid={errors.usuario ? 'true' : 'false'}
         />
-        {errors.username && <span>This field is required</span>}
+        {errors.usuario && <span>This field is required, min: 4, max: 8</span>}
       </div>
       <div className='form-item'>
         <label>Contraseña</label>
         <input
           type='password'
-          {...register('password', { required: true })}
+          {...register('password', { required: true, min: 6, max: 10 })}
           aria-invalid={errors.password ? 'true' : 'false'}
         />
-        {errors.password && <span>This field is required</span>}
+        {errors.password && <span>This field is required, min: 6, max: 8</span>}
       </div>
       <div className='form-item'>
         <label>Correo</label>
         <input
-          {...register('email', { required: true })}
+          type='email'
+          {...register('email', { required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/ } )}
           aria-invalid={errors.email ? 'true' : 'false'}
         />
         {errors.email && <span>This field is required</span>}

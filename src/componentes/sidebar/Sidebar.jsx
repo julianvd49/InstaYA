@@ -9,12 +9,14 @@ function Sidebar() {
         <NavLink className="list-group-item list-group-item-action list-group-item-light p-3" to="/login">
           Home
         </NavLink>
+        {localStorage.getItem("token-info") && 
         <NavLink className="list-group-item list-group-item-action list-group-item-light p-3" to="/order/create">
           Solicita InstaYA!
-        </NavLink>
+        </NavLink>}
+        {localStorage.getItem("token-info") && 
         <NavLink className="list-group-item list-group-item-action list-group-item-light p-3" to="/status">
           Estado de solicitudes
-        </NavLink>
+        </NavLink>}
       </div>
     </div>
   );
