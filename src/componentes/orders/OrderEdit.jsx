@@ -1,17 +1,53 @@
-import { useForm } from "react-hook-form";  
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import dateFormat from "dateformat";
 
 function OrderEdit() {
+  const { id } = useParams();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
+    setValue,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (dataForm) => {
+    axios
+      .put(`http://localhost:9000/api/orders/${id}`, dataForm)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect((data) => {
+    axios
+      .get(`http://localhost:9000/api/orders/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        setValue("fecha", dateFormat(res.data.fecha, "yyyy-mm-dd"));
+        // setValue('hora', dateFormat(res.data.hora, 'HH'));
+        // setValue('hora', res.data.hora);
+        setValue("estado", res.data.estado);
+        setValue("largo", res.data.largo);
+        setValue("ancho", res.data.ancho);
+        setValue("largo", res.data.largo);
+        setValue("alto", res.data.alto);
+        setValue("peso", res.data.peso);
+        setValue("dir_recogida", res.data.dir_recogida);
+        setValue("ciudad_recogida", res.data.ciudad_recogida);
+        setValue("destinatario", res.data.destinatario);
+        setValue("cc", res.data.cc);
+        setValue("dir_entrega", res.data.dir_entrega);
+        setValue("ciudad_entrega", res.data.ciudad_entrega);
+      })
+      .catch((err) => console.log(err));
+  });
 
   return (
     <form className="form-order" onSubmit={handleSubmit(onSubmit)}>
       <h1>
-          <i>Cambio al instante!</i>
+        <i>Cambio al instante!</i>
       </h1>
       <div className="form-item-date-time">
         <label>Fecha</label>
@@ -34,7 +70,6 @@ function OrderEdit() {
       <div className="form-item-horizontal">
         <label>Estado</label>
         <input
-          type="select"
           {...register("estado", { required: true })}
           aria-invalid={errors.estado ? "true" : "false"}
         />
@@ -76,7 +111,7 @@ function OrderEdit() {
       <div className="form-item-horizontal">
         <label>Direccion de recogida</label>
         <input
-          {...register("dirrecogida", { required: true })}
+          {...register("dir_recogida", { required: true })}
           aria-invalid={errors.dir_recogida ? "true" : "false"}
         />
         {errors.dir_recogida && <span>This field is required</span>}
@@ -100,19 +135,10 @@ function OrderEdit() {
       <div className="form-item-horizontal">
         <label>CC/NIT destinatario</label>
         <input
-          type="number"
           {...register("cc", { required: true })}
           aria-invalid={errors.cc ? "true" : "false"}
         />
         {errors.cc && <span>This field is required</span>}
-      </div>
-      <div className="form-item-horizontal">
-        <label>Direccion de entrega</label>
-        <input
-          {...register("dir_entrega", { required: true })}
-          aria-invalid={errors.dir_entrega ? "true" : "false"}
-        />
-        {errors.dir_entrega && <span>This field is required</span>}
       </div>
       <div className="form-item-horizontal">
         <label>Direccion de entrega</label>

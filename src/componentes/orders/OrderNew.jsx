@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function OrderNew() {
   const {
@@ -6,14 +7,20 @@ function OrderNew() {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (dataForm) => {
+    dataForm.id_usuario = "638e38702dcac6bc37a4a1e4";
+    dataForm.estado = "Aprobado";
+
+    axios
+      .post("http://localhost:9000/api/orders", dataForm)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <form className="form-order" onSubmit={handleSubmit(onSubmit)}>
       <h1>
-        <i>
-          Crea tu orden!
-        </i>
+        <i>Crea tu orden!</i>
       </h1>
       <div className="form-item-date-time">
         <label>Fecha</label>
@@ -69,7 +76,7 @@ function OrderNew() {
       <div className="form-item-horizontal">
         <label>Direccion de recogida</label>
         <input
-          {...register("dirrecogida", { required: true })}
+          {...register("dir_recogida", { required: true })}
           aria-invalid={errors.dir_recogida ? "true" : "false"}
         />
         {errors.dir_recogida && <span>This field is required</span>}
@@ -93,19 +100,10 @@ function OrderNew() {
       <div className="form-item-horizontal">
         <label>CC/NIT destinatario</label>
         <input
-          type="number"
           {...register("cc", { required: true })}
           aria-invalid={errors.cc ? "true" : "false"}
         />
         {errors.cc && <span>This field is required</span>}
-      </div>
-      <div className="form-item-horizontal">
-        <label>Direccion de entrega</label>
-        <input
-          {...register("dir_entrega", { required: true })}
-          aria-invalid={errors.dir_entrega ? "true" : "false"}
-        />
-        {errors.dir_entrega && <span>This field is required</span>}
       </div>
       <div className="form-item-horizontal">
         <label>Direccion de entrega</label>
